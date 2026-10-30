@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>An improved bound for the exceptional set of the Erdős–Straus equation</title>
-<meta name="description" content="Why 4/n = 1/x + 1/y + 1/z has so few possible exceptions: the idea behind the improved exponent 3/4, with live demos.">
+<meta name="description" content="Let E(N) be the number of integers 2 ≤ n ≤ N for which 4/n = 1/x + 1/y + 1/z has no solution in positive integers.">
 <meta property="og:title" content="An improved bound for the exceptional set of the Erdős–Straus equation">
-<meta property="og:description" content="Why 4/n = 1/x + 1/y + 1/z has so few possible exceptions: the idea behind the improved exponent 3/4, with live demos.">
+<meta property="og:description" content="Let E(N) be the number of integers 2 ≤ n ≤ N for which 4/n = 1/x + 1/y + 1/z has no solution in positive integers.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://sushaan-k.github.io/erdos-straus/">
 <meta property="og:image" content="https://sushaan-k.github.io/erdos-straus/static/og.png">
@@ -118,29 +118,24 @@
     <h1>An improved bound for the exceptional set of the Erdős–Straus equation</h1>
     <p class="authors">Sushaan Kandukoori, Shrikrishna Ramesh, Pranava Kumar</p>
     <a class="button" href="paper.pdf" target="_blank" rel="noopener">Paper</a>
-    <a class="button" href="https://github.com/sushaan-k/erdos-straus-lean/releases/tag/v3.0" target="_blank" rel="noopener">Lean code</a>
+    <a class="button" href="https://github.com/sushaan-k/erdos-straus-lean/releases/tag/v3.0" target="_blank" rel="noopener">Code</a>
     <a class="button" href="#bibtex">BibTeX</a>
   </div>
 </header>
 
-<section class="section is-light" id="problem">
+<section class="section is-light" id="abstract">
   <div class="wrap split">
     <div>
-      <h2>Can \(4/n\) always be split into three unit fractions?</h2>
-      <p>Take any integer \(n\ge2\). Erdős and Straus conjectured that there are always positive integers \(x,y,z\) with</p>
-      \[ \frac4n=\frac1x+\frac1y+\frac1z. \]
-      <p>Try a few numbers in the box. It keeps working, and nobody has proved that it always will. What can be proved is that exceptions are rare.</p>
-      <p>Let \(E(N)\) count the \(n\le N\) with no solution. Vaughan showed in 1970 that \(E(N)\ll N\exp\{-c(\log N)^{2/3}\}\). We raise the exponent.</p>
-      <div class="thm">
-        <b>Theorem 1.</b> There is an absolute constant \(c&gt;0\) such that, for all \(N\ge3\),
-        \[ E(N)\ll N\exp\{-c(\log N)^{3/4}\}. \]
-      </div>
-      <p>The same saving holds for exceptional primes, measured against \(\pi(N)\). It also holds for \(m/n\) with any fixed numerator \(m\ge4\), with constants depending on \(m\). (For \(m=2,3\) there is nothing to prove: \(\tfrac2n=\tfrac1n+\tfrac1{2n}+\tfrac1{2n}\) and \(\tfrac3n=\tfrac1n+\tfrac1n+\tfrac1n\).)</p>
+      <h2>Abstract</h2>
+      <p>Let \(E(N)\) be the number of integers \(2\le n\le N\) for which</p>
+      \[ \frac4n=\frac1x+\frac1y+\frac1z \]
+      <p>has no solution in positive integers. Vaughan proved \(E(N)\ll N\exp\{-c(\log N)^{2/3}\}\). We prove</p>
+      \[ E(N)\ll N\exp\{-c(\log N)^{3/4}\}. \]
+      <p>For each \(a\ge1\), the divisors of \(a^2\) supply congruence classes modulo \(4a-1\) on which such representations exist. For a large parameter \(X\), we select a family whose reciprocal moduli sum to order \((\log X)^3\). Averaging over small divisors retains this weight while controlling shared prime factors. A finite counting argument gives the stated bound at the scale \(\log X\asymp(\log N)^{1/4}\). The same argument gives this exponent for every fixed numerator \(m\ge4\).</p>
     </div>
     <div class="panel" id="solver">
-      <h3>Find a solution</h3>
-      <p class="hint">Uses the congruence explained in the next section. Each answer is checked with exact integer arithmetic.</p>
-      <div class="row">
+      <h3>Representations of \(4/n\)</h3>
+      <div class="row" style="margin-top:.6rem">
         <label for="n-input" class="note">\(n=\)</label>
         <input id="n-input" type="number" min="2" max="1000000000000" step="1" value="2521" aria-label="The integer n">
       </div>
@@ -150,160 +145,268 @@
   </div>
 </section>
 
-<section class="section" id="engine">
-  <div class="wrap split">
-    <div>
-      <h2>One divisor, one congruence, three fractions</h2>
-      <p>Here is the engine. Fix \(a\ge1\), pick a divisor \(h\) of \(a^2\), and suppose that \(4a-1\) divides \(n+4h\). Then</p>
-      \[ x=an,\qquad y=\frac{an+h}{4a-1},\qquad z=\frac{an+(an)^2/h}{4a-1} \]
-      <p>are positive integers, and they solve the equation. The algebra is short. Write \(A=an\) and \(q=4a-1\). Then \(qy-A=h\) and \(qz-A=A^2/h\), and these multiply to give \((qy-A)(qz-A)=A^2\). Expanding gives \(q=A(1/y+1/z)\), so</p>
-      \[ \frac1x+\frac1y+\frac1z=\frac{1+q}{an}=\frac4n. \]
-      <p>For example, \(n=2521\), \(a=12\), \(h=16\): here \(47\) divides \(2521+64=2585=47\cdot55\), which gives</p>
-      \[ \frac4{2521}=\frac1{644}+\frac1{30252}+\frac1{1217643}. \]
-      <p>So each \(a\) supplies one class of \(n\) modulo \(4a-1\) for every divisor of \(a^2\). The choices \(h=1,a,a^2\) are the simplest, with shifts \(-4,-1,-a\). We call the rest the interior divisors. Congruences of this kind are classical. The new saving comes from using the interior divisors with moduli \(4a-1\) that need not be prime.</p>
-    </div>
-    <div class="panel">
-      <h3>The classes supplied by one \(a\)</h3>
-      <p class="hint">Each dot is a residue class of \(n\) modulo \(4a-1\). Pick a divisor to see a solution.</p>
-      <label class="note" for="a-range">\(a=\) <b id="a-val">12</b></label>
-      <input id="a-range" type="range" min="2" max="60" value="12" aria-label="The parameter a">
-      <div class="fan-wrap">
-        <svg id="fan" viewBox="0 0 360 360" role="img" aria-label="Residue classes modulo 4a minus 1, with the classes supplied by divisors of a squared highlighted"></svg>
-        <div class="note" id="fan-sum"></div>
-        <div id="chips"></div>
-        <div class="result" id="fan-out" aria-live="polite" style="min-height:6.5rem;margin-top:.3rem"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section is-light" id="sieve">
-  <div class="wrap split wide-left">
-    <div class="panel">
-      <h3>Integers up to one million still uncovered</h3>
-      <div class="stats">
-        <div class="stat"><div class="v" id="s-a">1,000</div><div class="l">\(a\) runs up to</div></div>
-        <div class="stat"><div class="v" id="s-b">60,843</div><div class="l"><span class="swatch" style="background:var(--warm)"></span>using \(h=1,a,a^2\)</div></div>
-        <div class="stat"><div class="v" id="s-f">1,002</div><div class="l"><span class="swatch" style="background:var(--accent)"></span>using every \(h\mid a^2\)</div></div>
-      </div>
-      <div class="chart" id="sieve-chart"></div>
-      <input id="sieve-range" type="range" min="0" max="48" value="48" aria-label="Largest value of a in the sieve">
-    </div>
-    <div>
-      <h2>What the interior divisors buy</h2>
-      <p>Run the congruences as a sieve. Take the integers from \(2\) to \(10^6\) and, as \(a\) grows, cross off every class it supplies.</p>
-      <p>With only the three divisors \(h=1,a,a^2\), 60,843 integers remain when \(a\) reaches 1,000. With every divisor, 1,002 remain. This picture only illustrates small numbers, and the proof uses a much thinner family, but it shows how much the interior divisors add.</p>
-      <p>Of the 1,002 survivors, 999 are perfect squares, and the other three are 288, 336 and 4545. No congruence of this kind can ever cross off a perfect square.</p>
-      <details>
-        <summary>Why squares are never crossed off</summary>
-        <p>Suppose \(k^2\equiv-4h\pmod q\), where \(q=4a-1\) and \(h\mid a^2\). Write \(h=d^2f\) with \(a=dfA\), so \(f\mid a\). Since \(q\equiv3\pmod4\), the congruence forces the Jacobi symbol \((f/q)\) to equal \(-1\).</p>
-        <p>But reciprocity and \(q\equiv-1\pmod g\) give \((g/q)=1\) for the odd part \(g\) of \(f\). If \(f\) is even, then \(a\) is even and \(q\equiv-1\pmod8\), so \((2/q)=1\). Hence \((f/q)=1\), a contradiction.</p>
-        <p>This does not threaten the theorem. There are at most \(\sqrt N\) squares up to \(N\), and \(k^2\) inherits a solution from any divisor of \(k\) that has one: scale the denominators.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="cube">
-  <div class="wrap split">
-    <div>
-      <h2>Where the cube comes from</h2>
-      <p>Measure the weight of the family by adding up the densities \(1/(4a-1)\) of its classes. A pair \((a,h)\) with \(h\mid a^2\) is a triple in disguise. Put \(g=(a,h)\), \(d=h/g\), \(f=g/d\) and \(A=a/g\). Then</p>
-      \[ a=dfA,\qquad h=d^2f,\qquad (d,A)=1, \]
-      <p>and the triple is unique. So the weight is about \(\tfrac14\sum 1/(dfA)\) over \(dfA\le L\), a harmonic sum in three free variables, which has size \((\log L)^3\). The coprimality condition costs a factor \(1/\zeta(2)\), and the three-dimensional simplex costs \(1/6\):</p>
-      \[ \sum_{a\le L}\frac{|\Lambda_{\mathrm{int}}(a)|}{4a-1}\sim\frac{(\log L)^3}{24\,\zeta(2)}, \]
-      <p>where \(\Lambda_{\mathrm{int}}(a)\) is the set of interior divisors of \(a^2\).</p>
-      <p>There is a catch. Congruences with coprime moduli are independent of each other, by the Chinese remainder theorem, so pairwise coprime moduli \(4a-1\) would be the easy case. But if the integers \(4a-1\) are pairwise coprime, the same sum is only \(O((\log L)^2)\). Restricting \(4a-1\) to primes is one such case, and it is the lower curve in the chart. The extra logarithm comes from moduli that share factors, so the overlaps have to be faced.</p>
-    </div>
-    <div class="panel">
-      <h3>The weight, all \(a\) against \(4a-1\) prime</h3>
-      <p class="hint">\(\sum_{a\le L}|\Lambda_{\mathrm{int}}(a)|/(4a-1)\), computed up to \(L=2\cdot10^6\). At this range the lower-order terms are still large: the upper curve is about 1.5 times its main term.</p>
-      <div class="chart" id="mass-chart"></div>
-    </div>
-  </div>
-</section>
-
-<section class="section is-light" id="exponent">
+<section class="section" id="introduction">
   <div class="wrap">
-    <h2>Why a cube means \(3/4\)</h2>
-    <p class="lede">The exponent comes from a trade-off that is easy to state. Suppose a family of congruences has moduli at most \(X\) and total weight \(\mu\asymp(\log X)^k\).</p>
-    <div class="cards three">
-      <div class="card"><h3>The reward</h3><p>If the classes behave nearly independently, the proportion of integers missed by all of them is about \(e^{-\mu}\). More weight means a bigger saving.</p></div>
-      <div class="card"><h3>The price</h3><p>Seeing this on integers up to \(N\) takes inclusion–exclusion to depth of order \(\mu\), with moduli up to \(X^{O(\mu)}\). We also fix a class modulo \(P(z)\), the product of the primes up to \(z\). All of this must fit: \(\log P(z)+O(\mu\log X)\le\log N\).</p></div>
-      <div class="card"><h3>The balance</h3><p>With \(\log P(z)=O((\log X)^{k+1})\), both costs have size \((\log X)^{k+1}\). So take \(\log X\) of order \((\log N)^{1/(k+1)}\). The saving is then \(\exp\{-c(\log N)^{k/(k+1)}\}\).</p></div>
+    <h2>Introduction and main theorem</h2>
+    <div class="split">
+      <div>
+        <p>The Erdős–Straus conjecture asserts that for every integer \(n\ge2\) the equation</p>
+        \[ \frac4n=\frac1x+\frac1y+\frac1z \]
+        <p>has a solution in positive integers. Let \(E(N)\) count the exceptions \(2\le n\le N\). Vaughan proved the classical estimate</p>
+        \[ E(N)\ll N\exp\{-c(\log N)^{2/3}\} \]
+        <p>for some absolute \(c&gt;0\). Our main result improves the exponent.</p>
+        <div class="thm">
+          <b>Theorem 1 (main theorem).</b> There is an absolute constant \(c&gt;0\) such that, for all \(N\ge3\),
+          \[ E(N)\ll N\exp\{-c(\log N)^{3/4}\}. \]
+        </div>
+        <p>The same saving holds relative to the primes: the number of exceptional primes up to \(N\) is \(\ll\pi(N)\exp\{-c(\log N)^{3/4}\}\) after decreasing \(c\).</p>
+        <p>For \(m\ge4\), let \(E_m(N)\) count the positive integers \(n\le N\) for which \(m/n\) is not a sum of three unit fractions.</p>
+        <div class="thm">
+          <b>Theorem 2 (Erdős–Straus–Schinzel exceptional sets for a fixed numerator).</b> For each fixed integer \(m\ge4\), there are constants \(c_m,C_m&gt;0\) such that, for all \(N\ge3\),
+          \[ E_m(N)\le C_mN\exp\{-c_m(\log N)^{3/4}\}. \]
+        </div>
+        <p>The cases \(m=2,3\) have no exceptions, since</p>
+        \[ \frac2n=\frac1n+\frac1{2n}+\frac1{2n},\qquad \frac3n=\frac1n+\frac1n+\frac1n. \]
+        <p>Pomerance–Weingartner prove \(E_m(N)\le N\exp\{-C(\log N)^{2/3}/\varphi(m)^{1/3}\}\) uniformly for \(4\le m\le(\log N)^2\). For each fixed \(m\), Theorem 2 improves the exponent from \(2/3\) to \(3/4\), with constants depending on \(m\).</p>
+      </div>
+      <div>
+        <div class="thm">
+          <b>Example 1.1.</b> For \(n=2521\), take \(a=12\) and \(h=16\). Then \(h\mid a^2\) and
+          \[ 4a-1=47,\qquad n+4h=2585=47\cdot55. \]
+          Lemma 2.3 gives
+          \[ \frac4{2521}=\frac1{644}+\frac1{30252}+\frac1{1217643}. \]
+        </div>
+        <p>We use the Type II congruences</p>
+        \[ 4a-1\mid n+4h,\qquad h\mid a^2. \]
+        <p>The choices \(h=1,a,a^2\) give the shifts \(-4,-1,-a\) modulo \(4a-1\), respectively. The sum over the remaining divisors has cubic logarithmic order; see Proposition 4.2.</p>
+        <p>In the selected family, compatible congruences with the same large prime coincide. We bound the remaining overlaps by sums over common small factors. Two divisor sums give weight \((\log X)^2\); averaging over small divisors supplies \(\log z\), which combines with the rough cofactor sum \(\log X/\log z\) to give the third logarithm.</p>
+        <div class="thm">
+          <b>Remark 1.2 (the exponent \(3/4\)).</b> For a family of congruences with total weight \(\mu\asymp(\log X)^k\) and the overlap estimates below, the level condition of Theorem 5.4 has the form \(\log P(z)+O(\mu\log X)\le\log N\). When \(\log P(z)=O((\log X)^{k+1})\), choosing \(\log X\) of order \((\log N)^{1/(k+1)}\) gives a saving \(\exp\{-c(\log N)^{k/(k+1)}\}\). The family with prime moduli used in the Vaughan method has quadratic mass. Here the cubic mass gives \(3/4\).
+        </div>
+        <h3 class="sub">Formalization</h3>
+        <p>The companion Lean 4 development proves Theorems 1 and 2, the bound for exceptional primes, Example 1.1, and every numbered result of Sections 2–6, using only Mathlib and Lean's standard axioms. Its proof of Theorem 3.7 adapts an existing open source formalization of the Bombieri–Vinogradov theorem, credited in the repository.</p>
+      </div>
     </div>
-    <div class="tablewrap">
-      <table class="score">
-        <thead><tr><th>Family</th><th>Weight \(\mu\)</th><th>Scale \(\log X\)</th><th>Saving exponent</th></tr></thead>
-        <tbody>
-          <tr><td>Prime moduli, as in the Vaughan method</td><td>\((\log X)^2\)</td><td>\((\log N)^{1/3}\)</td><td>\(2/3\)</td></tr>
-          <tr><td><b>This paper</b></td><td>\((\log X)^3\)</td><td>\((\log N)^{1/4}\)</td><td><b>\(3/4\)</b></td></tr>
-        </tbody>
-      </table>
+  </div>
+</section>
+
+<section class="section is-light" id="congruences">
+  <div class="wrap">
+    <h2>Congruences</h2>
+    <div class="split">
+      <div>
+        <p>Fix \(m\ge4\). A Type II representation for a prime denominator is one in which exactly two denominators are divisible by the prime. The proof of Theorem 1 uses only Lemma 2.3. For arbitrary positive denominators we use the following sufficient condition.</p>
+        <div class="thm">
+          <b>Lemma 2.3 (a sufficient condition).</b> Let \(n\ge1\), let \(a\ge1\), let \(q=ma-1\), and let \(e\) be a positive divisor of \(a^2\). If
+          \[ n\equiv-me\pmod q, \]
+          then \(m/n\) is a sum of three positive unit fractions.
+        </div>
+        <p>Put \(A=an\). Since \(ma\equiv1\pmod q\), the congruence on \(n\) gives \(A\equiv-e\pmod q\). Since \(e\mid a^2\) and \((a,q)=1\), also \((e,q)=1\). Define</p>
+        \[ x=A,\qquad y=\frac{A+e}{q},\qquad z=\frac{A+A^2/e}{q}. \]
+        <p>Since \(e\mid a^2\), the quantity \(A^2/e=(a^2/e)n^2\) is an integer. The congruence \(A\equiv-e\pmod q\) makes \(y\) integral; squaring and multiplying by the inverse of \(e\) modulo \(q\) gives \(A^2/e\equiv e\pmod q\), so \(z\) is integral too. Both are positive. Moreover</p>
+        \[ qy-A=e,\qquad qz-A=A^2/e, \]
+        <p>and hence \((qy-A)(qz-A)=A^2\). Expanding and cancelling \(A^2\) gives</p>
+        \[ q^2yz-qA(y+z)=0. \]
+        <p>Dividing by \(qyz\) yields \(q=A(1/y+1/z)\). Therefore</p>
+        \[ \frac1x+\frac1y+\frac1z=\frac{1+q}{an}=\frac m n. \]
+      </div>
+      <div class="panel">
+        <h3>Classes modulo \(4a-1\) for \(h\mid a^2\)</h3>
+        <label class="note" for="a-range">\(a=\) <b id="a-val">12</b></label>
+        <input id="a-range" type="range" min="2" max="60" value="12" aria-label="The parameter a">
+        <div class="fan-wrap">
+          <svg id="fan" viewBox="0 0 360 360" role="img" aria-label="Residue classes modulo 4a minus 1, with the classes supplied by divisors of a squared marked"></svg>
+          <div class="note" id="fan-sum"></div>
+          <div id="chips"></div>
+          <div class="result" id="fan-out" aria-live="polite" style="min-height:6.5rem;margin-top:.3rem"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cubic">
+  <div class="wrap">
+    <h2>Cubic divisor sums and pairwise coprimality</h2>
+    <div class="split">
+      <div>
+        <p>This section concerns the numerator \(4\). For \(a\ge1\), set</p>
+        \[ \Lambda_{\mathrm{int}}(a)=\{h:h\mid a^2,\ h\notin\{1,a,a^2\}\},\qquad \Lambda_{&lt;}(a)=\{h:h\mid a^2,\ 1&lt;h&lt;a\}. \]
+        <div class="thm">
+          <b>Proposition 4.2 (cubic divisor sum).</b> As \(L\to\infty\),
+          \[ \sum_{a\le L}\frac{|\Lambda_{\mathrm{int}}(a)|}{4a-1}\sim\frac1{24\zeta(2)}(\log L)^3. \]
+          Moreover,
+          \[ \sum_{a\le L}\frac{|\Lambda_{&lt;}(a)|}{4a-1}\sim\frac1{48\zeta(2)}(\log L)^3. \]
+        </div>
+        <p>The involution \(h\mapsto a^2/h\) pairs divisors below and above \(a\). The excluded divisors \(1,a,a^2\) contribute only \(O(\log L)\) to the weighted sum.</p>
+        <p>For \(h\mid a^2\) put</p>
+        \[ g=(a,h),\qquad d=h/g,\qquad A=a/g. \]
+        <p>Then \((d,A)=1\), and \(h\mid a^2\) gives \(d\mid gA^2\). Hence \(d\mid g\); set \(f=g/d=g^2/h\). Now \(g=df\), so \(a=dfA\) and \(h=d^2f\). Conversely, any such decomposition with \((d,A)=1\) has \((a,h)=df\), which recovers \(d,f,A\) from these formulas and proves uniqueness.</p>
+        <div class="thm">
+          <b>Lemma 4.4 (divisor sum over primes).</b> For \(L\ge3\),
+          \[ \sum_{\substack{a\le L\\4a-1\ \mathrm{prime}}}\frac{\tau(a^2)}a\ll(\log L)^2. \]
+        </div>
+        <div class="thm">
+          <b>Proposition 4.5 (pairwise coprime moduli).</b> Let \(\mathcal B\subset\{a\le L\}\) be such that the integers \(4a-1\) with \(a\in\mathcal B\) are pairwise coprime. Then
+          \[ \sum_{a\in\mathcal B}\frac{|\Lambda_{\mathrm{int}}(a)|}{4a-1}\ll(\log L)^2. \]
+          Thus no subfamily of these congruences with pairwise coprime moduli can carry the cubic mass in Proposition 4.2.
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>\(\sum_{a\le L}|\Lambda_{\mathrm{int}}(a)|/(4a-1)\)</h3>
+          <div class="chart" id="mass-chart"></div>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <h3>Integers \(2\le n\le10^6\) in no class \(n\equiv-4h\pmod{4a-1}\)</h3>
+          <div class="stats">
+            <div class="stat"><div class="v" id="s-a">1,000</div><div class="l">bound on \(a\)</div></div>
+            <div class="stat"><div class="v" id="s-b">60,843</div><div class="l"><span class="swatch" style="background:var(--warm)"></span>\(h\in\{1,a,a^2\}\)</div></div>
+            <div class="stat"><div class="v" id="s-f">1,002</div><div class="l"><span class="swatch" style="background:var(--accent)"></span>\(h\mid a^2\)</div></div>
+          </div>
+          <div class="chart" id="sieve-chart"></div>
+          <input id="sieve-range" type="range" min="0" max="48" value="48" aria-label="Bound on a">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-light" id="counting">
+  <div class="wrap">
+    <h2>Counting compatible congruences</h2>
+    <div class="split">
+      <div>
+        <p>Put</p>
+        \[ z=(\log X)^4,\qquad U=(\log X)^8,\qquad P(z)=\prod_{\ell\le z}\ell. \]
+        <p>The product is over primes. For each reduced class \(b\pmod{P(z)}\), let \(I_b\) be a finite family of congruences with squarefree moduli \(q_i\le X\), coprime to \(P(z)\), and residues \(c_i\pmod{q_i}\). Write \(w_i=1/q_i\) and \(\mu_b=\sum_iw_i\). Two indices are compatible when their residues agree modulo \((q_i,q_j)\); a set is compatible when every pair is. Put</p>
+        \[ L_S=\operatorname{lcm}(q_i:i\in S),\qquad L_\varnothing=1,\qquad A(S)=\sum_{\substack{i\notin S\\S\cup\{i\}\ \mathrm{compatible}}}w_i(q_i,L_S). \]
+        <p>Let \(\Omega_b\) be the finite product probability space over all primes appearing in the moduli \(q_i\). The event \(\mathcal A_i^{(b)}\) is defined by the residue \(c_i\pmod{q_i}\). If two events are compatible, the Chinese Remainder Theorem gives</p>
+        \[ \mathbb P(\mathcal A_i^{(b)}\cap \mathcal A_j^{(b)})=\frac1{\operatorname{lcm}(q_i,q_j)}=\frac{(q_i,q_j)}{q_iq_j}; \]
+        <p>if they are incompatible, the intersection is empty. Put</p>
+        \[ W_b=\sum_{i\in I_b}\mathbf 1_{\mathcal A_i^{(b)}}. \]
+        <p>For distinct events \(i\ne j\), let \(i\sim j\) denote \((q_i,q_j)&gt;1\), and define</p>
+        \[ \delta_b=\sup_i\sum_{\substack{j\sim i\\j\ne i}}\mathbb P(\mathcal A_j^{(b)}),\qquad \Delta_b=\sum_{\substack{\{i,j\}:i\sim j\\i\ne j}}\mathbb P(\mathcal A_i^{(b)}\cap \mathcal A_j^{(b)}). \]
+        <p>Fix \(K\ge13\). In this section assume, uniformly in \(b\), that \(\mu_b\to\infty\) as \(X\to\infty\) and</p>
+        \[ A(S)\le2\mu_b\quad(|S|\le2K\mu_b,\ S\ \mathrm{compatible}),\qquad \delta_b\le\frac14,\qquad \Delta_b=o(\mu_b). \]
+      </div>
+      <div>
+        <div class="thm">
+          <b>Theorem 5.2 (probability of no event).</b> Uniformly in \(b\),
+          \[ \mathbb P(W_b=0)\le\exp\{-(1-o(1))\mu_b\}. \]
+        </div>
+        <p>We give a conditioning proof related to Spencer's argument. Fix \(b\) and abbreviate \(\mathcal A_i^{(b)}\), \(\mu_b\), \(\delta_b\), \(\Delta_b\) by \(A_i\), \(\mu\), \(\delta\), \(\Delta\). Put \(B_S=\bigcap_{j\in S}A_j^c\). We first show by induction on \(|S|\) that</p>
+        \[ \mathbb P(A_i\mid B_S)\le2w_i\qquad(i\notin S). \]
+        <p>Write \(\Gamma=\{j\in S:j\sim i\}\) and \(T=S\setminus\Gamma\). If \(\Gamma\) is empty, independence gives equality with \(w_i\). Otherwise \(|T|&lt;|S|\), so induction and the union bound give</p>
+        \[ \mathbb P(B_\Gamma\mid B_T)\ge1-\sum_{j\in\Gamma}\mathbb P(A_j\mid B_T)\ge1-2\delta. \]
+        <p>Since \(A_i\) is independent of \(B_T\), division by this lower bound proves \(\mathbb P(A_i\mid B_S)\le w_i/(1-2\delta)\le2w_i\).</p>
+        <p>For a lower bound, the same partition gives</p>
+        \[ \mathbb P(A_i\mid B_S)\ge\mathbb P(A_i\cap B_\Gamma\mid B_T)\ge w_i-\sum_{j\in\Gamma}\mathbb P(A_i\cap A_j\mid B_T). \]
+        <p>Fix \(j\in\Gamma\), put \(E=\{k\in T:k\sim j\}\), and write \(T_0=T\setminus E\). No vertex of \(T_0\) is adjacent to either \(i\) or \(j\), so the pair \((A_i,A_j)\) is independent of \(B_{T_0}\). The bound just proved gives \(\mathbb P(B_E\mid B_{T_0})\ge1-2\delta\), and hence</p>
+        \[ \mathbb P(A_i\cap A_j\mid B_T)\le\frac{\mathbb P(A_i\cap A_j\mid B_{T_0})}{\mathbb P(B_E\mid B_{T_0})}\le\frac{\mathbb P(A_i\cap A_j)}{1-2\delta}. \]
+        <p>Order the vertices and apply the lower bound with \(S\) equal to the preceding vertices, so that each unordered edge contributes once. The chain rule, \(1-t\le e^{-t}\), and these uniform bounds give</p>
+        \[ \mathbb P(W_b=0)\le\exp\left\{-\mu+\frac{\Delta}{1-2\delta}\right\}\le\exp\{-\mu+2\Delta\}=\exp\{-(1-o(1))\mu_b\}. \]
+        <div class="thm">
+          <b>Theorem 5.4 (finite counting estimate).</b> Fix \(K\ge13\) and put \(R_b=\lfloor K\mu_b\rfloor\). Suppose that
+          \[ P(z)X^{2R_b}\exp\{2\mu_b\}\le N\exp\{-4\mu_b\}. \]
+          Then, uniformly in \(b\),
+          \[ \#\{n\le N:n\equiv b\pmod{P(z)},\quad n\notin \mathcal A_i^{(b)}\ \text{for every }i\in I_b\}\le\frac{N}{P(z)}\exp\{-(1-o(1))\mu_b\}. \]
+        </div>
+        <div class="thm">
+          <b>Lemma 5.5 (lifting).</b> Let \(\mathcal E\) be a set of positive integers closed under taking divisors. Suppose \(2\le y\ll\log N\) and, uniformly for \(\sqrt N\le T\le N\),
+          \[ \#\{u\le T:u\in\mathcal E,\ (u,P(y))=1\}\le ATe^{-F} \]
+          for \(A&gt;0\) and \(F\ge0\). Then
+          \[ \#(\mathcal E\cap[1,N])\ll AN\log(2y)e^{-F}+N^{3/4+o(1)}. \]
+          The error is uniform for a fixed constant in \(y\ll\log N\).
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="family">
   <div class="wrap">
-    <h2>A family that keeps the cube</h2>
-    <p class="lede">Fix \(m\ge4\), put \(z=(\log X)^4\), and fix a reduced class \(b\) modulo \(P(z)\). Each congruence in the family is built from four pieces, and each piece accounts for one factor in the weight.</p>
-    <div class="cards four">
-      <div class="card"><h3>The divisor \(e=rs^2\)</h3><p>Here \(r,s\) are squarefree and coprime. We keep \(s\) small, at most \(X^{1/100}\), and let \(e\) run up to \(X^{3/10}\) with \(rs\) above \(X^{1/10}\). The sum over \(r\) and the sum over \(s\) each give a logarithm.</p><p><b>Gives \((\log X)^2\)</b></p></div>
-      <div class="card"><h3>The small part \(d_-\)</h3><p>An odd squarefree divisor of \(P(z)\), at most \((\log X)^8\), with \(b\equiv-me\pmod{d_-}\). The fixed class \(b\) already takes care of this part of the congruence, so \(d_-\) does not count against the density of the class. Only some \(e\) pass the test, but averaging over \(e\) leaves, up to constants, the sum of \(1/d_-\), which has size \(\log z\).</p><p><b>Gives \(\log z\)</b></p></div>
-      <div class="card"><h3>The rough part \(d_+\)</h3><p>Squarefree with no prime factor up to \(z\), and small: \(d_-d_+\le X^{1/20}\). Numbers with no prime factor up to \(z\) have density about \(1/\log z\), so the sum of \(1/d_+\) has size about \(\log X/\log z\).</p><p><b>Gives \(\log X/\log z\)</b></p></div>
-      <div class="card"><h3>The large prime \(p\)</h3><p>A prime with \(X^{2/3}&lt;p\le X^{19/20}\) and \(d_-d_+p\equiv-1\pmod{m\operatorname{rad}(e)}\), where \(\operatorname{rad}(e)=rs\). The Bombieri–Vinogradov theorem says that primes spread evenly among residue classes, on average over moduli up to about the square root of their size. It lets us count these primes.</p><p><b>Gives a positive constant</b></p></div>
-    </div>
-    <div class="product">\( (\log X)^2\cdot\log z\cdot\dfrac{\log X}{\log z}\asymp(\log X)^3 \)</div>
-    <p style="margin-top:1.1rem" class="lede">The \(\log z\) cancels, so removing the small primes from the rough part costs nothing overall. The result is \(\mu_b\asymp_m(\log X)^3\), uniformly in \(b\). Every member of the family does produce solutions. The condition on \(p\) makes \(a=(d_-d_+p+1)/m\) an integer divisible by \(\operatorname{rad}(e)\), so \(e\mid a^2\). The congruence from the second section, with \(4\) replaced by \(m\), then gives a representation for every \(n\equiv-me\) modulo \(d_-d_+p\).</p>
-  </div>
-</section>
-
-<section class="section is-light" id="overlaps">
-  <div class="wrap split">
-    <div>
-      <h2>Almost independent is enough</h2>
-      <p>After fixing \(n\equiv b\pmod{P(z)}\), each congruence is an event of probability \(1/q\) with \(q=d_+p\). Independent events would all be missed with probability about \(e^{-\mu}\). Two facts show that these events are close enough to independent.</p>
-      <h3 class="sub">Compatible events cannot share their large prime</h3>
-      <p>Call two events compatible if some integer satisfies both. Suppose two compatible events have the same large prime \(p\), with divisors \(e\) and \(e'\). Then \(me\equiv me'\pmod p\), and \(e,e'\) are much smaller than \(p\), so \(e=e'\). The condition on \(p\) then fixes \(d_-d_+\) modulo \(m\operatorname{rad}(e)\). That product is smaller than \(\operatorname{rad}(e)\), so it is fixed outright, and the two events are the same.</p>
-      <h3 class="sub">Everything else is a rough common factor</h3>
-      <p>So dependent events share only primes above \(z\), and taking \(z\) as large as \((\log X)^4\) makes those primes rare. Call the events that share one with a given event its neighbours. Their total weight is at most about</p>
-      \[ \mu_b\cdot\frac{\log X}{z\log z}\ll\frac1{\log\log X}. \]
-      <p>Writing \(\delta_b\) for this neighbour weight and \(\Delta_b\) for the sum of the pair probabilities over dependent pairs, we get \(\delta_b=o(1)\) and \(\Delta_b=o(\mu_b)\).</p>
-    </div>
-    <div>
-      <div class="thm">
-        <b>Theorem 5.2 of the paper, with the inequality from its proof shown.</b> If \(W_b\) counts the events that occur, \(\delta_b\le\tfrac14\) and \(\Delta_b=o(\mu_b)\), then
-        \[ \mathbb P(W_b=0)\le\exp\left\{-\mu_b+\frac{\Delta_b}{1-2\delta_b}\right\}=\exp\{-(1-o(1))\mu_b\}. \]
+    <h2>The selected family</h2>
+    <div class="split">
+      <div>
+        <p>Fix \(m\ge4\) for the rest of the proof; all thresholds may depend on \(m\). Fix</p>
+        \[ (\eta,\sigma,\lambda,\theta,\beta,\nu)=\left(\frac1{100},\frac1{20},\frac1{10},\frac3{10},\frac23,\frac8{25}\right), \]
+        \[ S_0=X^\eta,\qquad Y_0=X^\lambda,\qquad Y=X^\sigma,\qquad H=X^\theta. \]
+        <p>Define \(\mathcal F\) to be the set of integers \(e=rs^2\), \(\operatorname{rad}(e)=rs\), where \(r\) and \(s\) are squarefree, \((r,s)=1\), \((rs,m)=1\), and</p>
+        \[ 1\le s\le S_0,\qquad \frac{Y_0}{s}&lt;r\le\frac{H}{s^2}. \]
+        <p>We first fix a reduced residue class modulo \(P(z)\): \(b\in(\mathbb Z/P(z)\mathbb Z)^\times\). For \(e\in\mathcal F\), choose a small squarefree odd divisor \(d_-\) and a rough squarefree cofactor \(d_+\) such that</p>
+        \[ d_-\le U,\qquad d_-\mid P(z),\qquad b\equiv-me\pmod{d_-}, \]
+        \[ d_-d_+\le Y,\qquad (d_+,P(z))=1,\qquad (d_-d_+,m\operatorname{rad}(e))=1. \]
+        <p>Finally choose a prime \(p\) satisfying</p>
+        \[ X^\beta&lt;p\le X^{1-\sigma},\qquad d_-d_+p\equiv-1\pmod{m\operatorname{rad}(e)}. \]
+        <p>For every quadruple \(i=(e,d_-,d_+,p)\) satisfying these conditions, define</p>
+        \[ Q_i=d_-d_+p,\qquad q_i=d_+p,\qquad a_i=\frac{Q_i+1}{m}, \]
+        \[ \mathcal A_i^{(b)}=\{n:n\equiv-me\pmod{q_i}\},\qquad w_i^{(b)}=\frac1{q_i}. \]
+        <p>The full modulus is \(Q_i\); after conditioning on \(n\equiv b\pmod{P(z)}\), only the residual modulus \(q_i\) contributes to the density. Indeed, \(d_-\mid P(z)\) and \(b\equiv-me\pmod{d_-}\) give \(n\equiv-me\pmod{d_-}\). Combining this with \(\mathcal A_i^{(b)}\) gives</p>
+        \[ n\equiv-me\pmod{Q_i}. \]
+        <p>The congruence on \(p\) implies that \(a_i\) is an integer and \(\operatorname{rad}(e)\mid a_i\). Because \(e=rs^2\) and \(\operatorname{rad}(e)=rs\), this gives \(e\mid a_i^2\); also \(Q_i=ma_i-1\). Lemma 2.3 therefore gives a representation. Let \(I_b\) be the set of all quadruples above and set</p>
+        \[ \mu_b=\sum_{i\in I_b}w_i^{(b)}. \]
       </div>
-      <p>The proof is a short conditioning argument. By induction, conditioning on any earlier events not occurring at most doubles the probability of an event. That bound shows the conditional probability is at least \(1/q\) minus the pair terms divided by \(1-2\delta_b\). Multiplying along an ordering of the events gives the bound, so no correlation inequality has to be quoted.</p>
-      <h3 class="sub">From the model to actual integers</h3>
-      <p>So far \(n\) has been random modulo each prime. To pass to actual integers, expand the chance of missing every event by inclusion–exclusion and stop at the even depth \(r=2\lfloor13\mu_b\rfloor\). What is left out is below \(e^{-4\mu_b}\), and each intersection of events is counted correctly to within \(1\). Those errors stay small as long as</p>
-      \[ P(z)X^{r}e^{2\mu_b}\le Ne^{-4\mu_b}. \]
-      <h3 class="sub">Finishing</h3>
-      <p>Take \(\log X=\alpha(\log N)^{1/4}\) with \(\alpha\) small. Then \(\mu_b\) has order \((\log N)^{3/4}\) and the condition above holds. This bounds the exceptions coprime to \(P(z)\). Exceptions are closed under taking divisors, because a representation for a divisor of \(n\) scales up to \(n\). So the integers with small prime factors follow by pulling those factors out, and the bound holds for all \(n\).</p>
+      <div>
+        <div class="thm">
+          <b>Theorem 3.7 (Bombieri–Vinogradov).</b> For every fixed \(A&gt;0\) and \(0&lt;\vartheta&lt;1/2\), uniformly for \(x\ge3\),
+          \[ \sum_{q\le x^\vartheta}\max_{(a,q)=1}\left|\pi(x;q,a)-\frac{\pi(x)}{\varphi(q)}\right|\ll_{A,\vartheta}\frac{x}{(\log x)^A}. \]
+        </div>
+        <div class="thm">
+          <b>Proposition 6.2 (quadratic divisor sums).</b> The selected divisor family, before any sieving at small primes, satisfies
+          \[ M_1:=\sum_{e\in\mathcal F}\frac1{\operatorname{rad}(e)}\asymp_m(\log X)^2,\qquad M_\varphi:=\sum_{e\in\mathcal F}\frac1{\varphi(\operatorname{rad}(e))}\asymp_m(\log X)^2. \]
+        </div>
+        <div class="thm">
+          <b>Lemma 6.5 (average over small divisors).</b> Uniformly for every \(b\in(\mathbb Z/P(z)\mathbb Z)^\times\),
+          \[ \Sigma_b:=\sum_{\substack{d_-\le U\\d_-\mid P(z)\\d_-\ \mathrm{odd}}}\sum_{\substack{e\in\mathcal F\\b\equiv-me\pmod{d_-}}}\frac1{\varphi(m\operatorname{rad}(e))}\asymp_m(\log X)^2\log z. \]
+        </div>
+        <div class="thm">
+          <b>Proposition 6.6 (total event weight).</b> Uniformly in \(b\in(\mathbb Z/P(z)\mathbb Z)^\times\),
+          \[ \mu_b\asymp_m(\log X)^3. \]
+        </div>
+        <div class="thm">
+          <b>Lemma 6.8 (uniqueness when the large prime is shared).</b> Two distinct compatible events in \(I_b\) cannot share the same large prime \(p\). For any prime \(p&gt;X^\beta\), the total weight of events having this large prime is at most \(H/p\le X^{\theta-\beta}=o(1)\).
+        </div>
+        <div class="thm">
+          <b>Lemma 6.9 (overlap bounds).</b> Uniformly in \(b\),
+          \[ \delta_b=o_m(1),\qquad \Delta_b=o_m(\mu_b). \]
+          For every fixed \(K&gt;0\) and every compatible \(S\) with \(|S|\le K\mu_b\),
+          \[ A(S)\le\mu_b(1+o_{m,K}(1)). \]
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="lean">
+<section class="section is-light" id="completion">
   <div class="wrap split">
     <div>
-      <h2>Checked by a computer</h2>
-      <p>The companion development in the proof assistant Lean 4 proves Theorem 1, the version for any fixed numerator \(m\ge4\) (Theorem 2 of the paper), the bound for exceptional primes, the example above, and every numbered result of Sections 2 to 6 of the paper. It uses only Lean's mathematics library Mathlib and Lean's standard axioms. Its proof of the Bombieri–Vinogradov theorem adapts an existing open source formalization, credited in the repository. The repository's README maps each result in the paper to its Lean name.</p>
-      <pre class="code">theorem erdos_straus_exceptional_set_bound :
-    IsMainBound exceptionalCount</pre>
+      <h2>Completion of the proof</h2>
+      <p><b>Proof of Theorem 2.</b> Fix \(m\ge4\) and \(K=13\). Proposition 6.6 and Lemma 6.9, using the latter with parameter \(2K\), verify the hypotheses of Section 5 for all sufficiently large \(X\), uniformly in \(b\). Choose</p>
+      \[ \log X=\alpha_m(\log N)^{1/4}, \]
+      <p>with \(\alpha_m&gt;0\) sufficiently small. Lemma 3.1 gives \(\log P(z)\ll z=(\log X)^4\). For \(R_b=\lfloor K\mu_b\rfloor\),</p>
+      \[ \log P(z)+2R_b\log X+6\mu_b\ll_m(\log X)^4. \]
+      <p>Taking \(\alpha_m\) small makes this at most \(\tfrac12\log N\). Since \(\log T\ge\tfrac12\log N\) for \(\sqrt N\le T\le N\), this choice of \(X\), cutoff, and family satisfies the level condition of Theorem 5.4 throughout that range. Theorem 5.4, summed over the reduced classes modulo \(P(z)\), gives</p>
+      \[ \#\{n\le T:(n,P(z))=1,\ m/n\text{ has no representation}\}\ll_m T\exp\{-c'_m(\log N)^{3/4}\}. \]
+      <p>The exceptional set is closed under taking divisors: a representation for a divisor of \(n\) scales to one for \(n\). Apply Lemma 5.5 at the common cutoff \(z=\alpha_m^4\log N\). The factor \(\log(2z)\) and the error \(N^{3/4+o_m(1)}\) are absorbed by decreasing \(c'_m\).</p>
+      <p><b>Proof of Theorem 1.</b> Take \(m=4\) in Theorem 2 and use \(E(N)\le E_4(N)\). The assertion for prime denominators follows as well, since \(\pi(N)\gg N/\log N\) and the factor \(\log N\) is absorbed by decreasing the constant in the exponential.</p>
     </div>
     <div>
-      <h2>What remains open</h2>
-      <p>The conjecture itself. The theorem says exceptions are very rare, and it does not rule them out.</p>
-      <p>The proof also gives no computable values for its thresholds, because the usual Bombieri–Vinogradov theorem does not supply them. Applying effective variants of that theorem to this family would need a separate analysis.</p>
-      <p>For the full statements and proofs, with every hypothesis and constant, read <a href="paper.pdf" target="_blank" rel="noopener">the paper</a>.</p>
+      <h2>Further remarks</h2>
+      <div class="thm">
+        <b>Remark 7.1 (geometry).</b> For numerator \(4\), the surface \(U_n:4xyz=n(xy+xz+yz)\) is an affine part of a Cayley cubic. In projective coordinates \((x_0:x_1:x_2:x_3)\), its closure is
+        \[ 4x_1x_2x_3=nx_0(x_1x_2+x_1x_3+x_2x_3). \]
+        Fixing \(x=an\) gives \((4a-1)yz=an(y+z)\), so the projective closures of these curves are the conic components of explicit plane sections.
+      </div>
+      <div class="thm">
+        <b>Remark 7.2 (effectivity).</b> The thresholds obtained here inherit the ineffectivity of the usual Bombieri–Vinogradov theorem. Johnston gives effective variants for sifting problems; applying them to this family requires a separate analysis.
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section is-light" id="bibtex">
+<section class="section" id="bibtex">
   <div class="wrap">
     <h2>BibTeX</h2>
     <div class="copywrap">
@@ -368,7 +471,6 @@ function solve(n){
   }
   return null;
 }
-const isSquare = n => { const r = Math.round(Math.sqrt(n)); return r * r === n; };
 const put = (el, tex, display) => { if (window.katex) window.katex.render(tex, el, { displayMode: !!display, throwOnError: false }); else el.textContent = tex; };
 
 /* ---------- solver ---------- */
@@ -376,19 +478,18 @@ function runSolver(){
   const out = document.getElementById('solver-out');
   const raw = document.getElementById('n-input').value.trim();
   const n = Number(raw);
-  if (!Number.isInteger(n) || n < 2 || n > 1e12) { out.innerHTML = '<p class="note">Enter a whole number from 2 to 1,000,000,000,000.</p>'; return; }
+  if (!Number.isInteger(n) || n < 2 || n > 1e12) { out.innerHTML = '<p class="note">2 ≤ n ≤ 10¹²</p>'; return; }
   const r = solve(n);
-  if (!r) { out.innerHTML = '<p class="note">No solution found within this search limit. That only means the search stopped, not that ' + fmt(n) + ' is an exception.</p>'; return; }
+  if (!r) { out.innerHTML = '<p class="note">No class n ≡ −4h (mod 4a − 1) found.</p>'; return; }
   const ok = verified(n, r.s);
   const eq = document.createElement('div');
   put(eq, `\\frac{4}{${n}}=\\frac{1}{${r.s.x}}+\\frac{1}{${r.s.y}}+\\frac{1}{${r.s.z}}`, true);
   const how = document.createElement('p'); how.className = 'note';
-  how.innerHTML = '<span class="check">' + (ok ? 'Checked exactly.' : 'Check failed.') + '</span> ';
+  if (!ok) { out.innerHTML = ''; return; }
   const m = document.createElement('span');
-  if (r.scale === 1) { how.append('Found with '); put(m, `a=${r.a},\\ h=${r.h}`); how.append(m, ': '); const d = document.createElement('span'); put(d, `${r.q}\\mid ${n + 4 * r.h}`); how.append(d, '.'); }
+  if (r.scale === 1) { put(m, `a=${r.a},\\ h=${r.h}`); how.append(m, ': '); const d = document.createElement('span'); put(d, `${r.q}\\mid ${n + 4 * r.h}`); how.append(d, '.'); }
   else {
-    how.append(isSquare(n) ? 'A perfect square has no direct congruence, so this scales up a solution for its divisor ' : 'No direct congruence was found, so this scales up a solution for its divisor ');
-    how.append(fmt(r.base) + ' (with '); put(m, `a=${r.a},\\ h=${r.h}`); how.append(m, ').');
+    how.append('A representation for the divisor ' + r.base + ' scales to one for ' + n + ' ('); put(m, `a=${r.a},\\ h=${r.h}`); how.append(m, ').');
   }
   out.replaceChildren(eq, how);
 }
@@ -434,7 +535,7 @@ function drawFan(a){
   const interior = [...cls.values()].filter(v => !v.some(h => boundary.has(h))).length;
   const bcount = cls.size - interior;
   const sum = document.getElementById('fan-sum');
-  sum.innerHTML = '<span class="swatch" style="background:' + WARM + '"></span>' + bcount + (bcount === 1 ? ' class' : ' classes') + ' from h = 1, a, a²&nbsp;&nbsp; <span class="swatch" style="background:' + BLUE + '"></span>' + interior + (interior === 1 ? ' class' : ' classes') + ' only from interior divisors';
+  sum.innerHTML = '<span class="swatch" style="background:' + WARM + '"></span>' + bcount + (bcount === 1 ? ' class' : ' classes') + ', h = 1, a, a²&nbsp;&nbsp; <span class="swatch" style="background:' + BLUE + '"></span>' + interior + (interior === 1 ? ' class' : ' classes') + ', other h';
   const chips = document.getElementById('chips'); chips.replaceChildren();
   hs.forEach(h => {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'chip' + (boundary.has(h) ? ' b' : ''); b.textContent = 'h = ' + h; b.setAttribute('aria-pressed', h === fanH);
@@ -444,7 +545,7 @@ function drawFan(a){
   const s = fractions(n, a, fanH), out = document.getElementById('fan-out'), l = document.createElement('p'), e = document.createElement('div');
   l.className = 'note'; l.style.marginBottom = '0';
   const m1 = document.createElement('span'); put(m1, `h=${fanH}`); const m2 = document.createElement('span'); put(m2, `n\\equiv ${selR}\\pmod{${q}}`); const m3 = document.createElement('span'); put(m3, `n=${n}`);
-  l.append(m1, ' gives ', m2, '. Smallest case, ', m3, ':');
+  l.append(m1, ': ', m2, '. For ', m3, ',');
   put(e, `\\frac{4}{${n}}=\\frac{1}{${s.x}}+\\frac{1}{${s.y}}+\\frac{1}{${s.z}}`, true);
   out.replaceChildren(l, e);
   document.getElementById('a-val').textContent = a;
@@ -503,11 +604,11 @@ function initCharts(){
   const range = document.getElementById('sieve-range'); range.max = rows.length - 1; range.value = rows.length - 1;
   const host = document.getElementById('sieve-chart');
   lineChart(host, {
-    rows, aria: 'Integers up to one million left uncovered as a grows to 1000: with the divisors 1, a and a squared about 60 thousand remain, with all divisors about one thousand remain.',
+    rows, aria: 'Integers 2 ≤ n ≤ 10⁶ in no class n ≡ −4h (mod 4a−1) against the bound on a, for h in {1, a, a²} and for h | a²; at a ≤ 1000 the counts are 60,843 and 1,002.',
     x: v => Math.log10(v), y: v => Math.log10(v), xMin: 0, xMax: 3, yMin: 3, yMax: 6,
     xTicks: [1, 10, 100, 1000], xFmt: fmt, yTicks: [1000, 10000, 100000, 1000000], yFmt: v => v >= 1e6 ? '1M' : (v / 1000) + 'k',
-    xLabel: 'largest a used (log scale)',
-    series: [{ i: 1, color: WARM, dash: '6 4', label: 'h = 1, a, a²' }, { i: 2, color: BLUE, label: 'all h | a²' }],
+    xLabel: 'bound on a (log scale)',
+    series: [{ i: 1, color: WARM, dash: '6 4', label: 'h = 1, a, a²' }, { i: 2, color: BLUE, label: 'h | a²' }],
     tip: r => 'a ≤ ' + fmt(r[0]) + ': ' + fmt(r[1]) + ' vs ' + fmt(r[2]),
     onPick: i => { setStats(i); range.value = i; },
     onLeave: () => setStats(+range.value)
@@ -515,10 +616,10 @@ function initCharts(){
   range.addEventListener('input', () => { setStats(+range.value); host._show(+range.value); });
   const mass = DATA.mass.filter(r => r[0] >= 10);
   lineChart(document.getElementById('mass-chart'), {
-    rows: mass, aria: 'The sum over all a grows much faster than the sum restricted to a with 4a minus 1 prime, reaching about 117 against 28 at L equal to two million.',
+    rows: mass, aria: 'Sum over a ≤ L of |Λint(a)|/(4a−1), for all a and for 4a−1 prime; at L = 2·10⁶ the values are 117.2 and 28.3.',
     x: v => Math.log(v), y: v => v, xMin: Math.log(10), xMax: Math.log(2e6), yMin: 0, yMax: 120,
     xTicks: [10, 1000, 100000, 2000000], xFmt: v => v >= 1e6 ? '2·10⁶' : v >= 1e5 ? '10⁵' : v >= 1000 ? '10³' : '10',
-    yTicks: [0, 40, 80, 120], yFmt: String, xLabel: 'L (axis linear in log L)',
+    yTicks: [0, 40, 80, 120], yFmt: String, xLabel: 'L (log scale)',
     series: [{ i: 1, color: BLUE, label: 'all a' }, { i: 2, color: WARM, dash: '6 4', label: '4a−1 prime' }],
     tip: r => 'L = ' + fmt(r[0]) + ': ' + r[1].toFixed(1) + ' vs ' + r[2].toFixed(1)
   });
