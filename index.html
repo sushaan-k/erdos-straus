@@ -55,7 +55,7 @@
   .katex-display{margin:.7em 0;overflow-x:auto;overflow-y:hidden;padding:.15rem 0}
   .thm{margin:1.25rem 0;padding:1.05rem 1.3rem 1.1rem;background:#fff;border:1px solid #e3e3e3;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);font-family:Castoro,Georgia,serif;font-size:1.04em;line-height:1.55;color:var(--ink)}
   .thm .katex-display{margin:.5em 0}
-  .thm b{display:block;margin-bottom:.4rem;font-family:'Google Sans','Noto Sans',sans-serif;font-size:.9em;font-weight:600;letter-spacing:.005em;color:var(--ink)}
+  .thm b{display:block;margin-bottom:.4rem;font-family:'Noto Sans',Arial,sans-serif;font-size:.86em;font-weight:700;color:#1f1f1f}
   .thm b .katex{font-size:1em}
   /* widgets */
   .panel{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:clamp(16px,2vw,24px)}
@@ -283,7 +283,7 @@
         <p>Put</p>
         \[ z=(\log X)^4,\qquad U=(\log X)^8,\qquad P(z)=\prod_{\ell\le z}\ell. \]
         <p>The product is over primes. For each reduced class \(b\pmod{P(z)}\), let \(I_b\) be a finite family of congruences with squarefree moduli \(q_i\le X\), coprime to \(P(z)\), and residues \(c_i\pmod{q_i}\). Write \(w_i=1/q_i\) and \(\mu_b=\sum_iw_i\). Two indices are compatible when their residues agree modulo \((q_i,q_j)\); a set is compatible when every pair is. Put</p>
-        \[ L_S=\operatorname{lcm}(q_i:i\in S),\qquad L_\varnothing=1,\qquad A(S)=\sum_{\substack{i\notin S\\S\cup\{i\}\ \mathrm{compatible}}}w_i(q_i,L_S). \]
+        \[ \begin{gathered} L_S=\operatorname{lcm}(q_i:i\in S),\qquad L_\varnothing=1,\\ A(S)=\sum_{\substack{i\notin S\\S\cup\{i\}\ \mathrm{compatible}}}w_i(q_i,L_S). \end{gathered} \]
         <p>Let \(\Omega_b\) be the finite product probability space over all primes appearing in the moduli \(q_i\). The event \(\mathcal A_i^{(b)}\) is defined by the residue \(c_i\pmod{q_i}\). If two events are compatible, the Chinese Remainder Theorem gives</p>
         \[ \mathbb P(\mathcal A_i^{(b)}\cap \mathcal A_j^{(b)})=\frac1{\operatorname{lcm}(q_i,q_j)}=\frac{(q_i,q_j)}{q_iq_j}; \]
         <p>if they are incompatible, the intersection is empty. Put</p>
@@ -291,7 +291,7 @@
         <p>For distinct events \(i\ne j\), let \(i\sim j\) denote \((q_i,q_j)&gt;1\), and define</p>
         \[ \delta_b=\sup_i\sum_{\substack{j\sim i\\j\ne i}}\mathbb P(\mathcal A_j^{(b)}),\qquad \Delta_b=\sum_{\substack{\{i,j\}:i\sim j\\i\ne j}}\mathbb P(\mathcal A_i^{(b)}\cap \mathcal A_j^{(b)}). \]
         <p>Fix \(K\ge13\). In this section assume, uniformly in \(b\), that \(\mu_b\to\infty\) as \(X\to\infty\) and</p>
-        \[ A(S)\le2\mu_b\quad(|S|\le2K\mu_b,\ S\ \mathrm{compatible}),\qquad \delta_b\le\frac14,\qquad \Delta_b=o(\mu_b). \]
+        \[ \begin{gathered} A(S)\le2\mu_b\quad(|S|\le2K\mu_b,\ S\ \mathrm{compatible}),\\ \delta_b\le\frac14,\qquad \Delta_b=o(\mu_b). \end{gathered} \]
       </div>
       <div>
         <div class="thm">
@@ -308,12 +308,12 @@
         <p>Fix \(j\in\Gamma\), put \(E=\{k\in T:k\sim j\}\), and write \(T_0=T\setminus E\). No vertex of \(T_0\) is adjacent to either \(i\) or \(j\), so the pair \((A_i,A_j)\) is independent of \(B_{T_0}\). The bound just proved gives \(\mathbb P(B_E\mid B_{T_0})\ge1-2\delta\), and hence</p>
         \[ \mathbb P(A_i\cap A_j\mid B_T)\le\frac{\mathbb P(A_i\cap A_j\mid B_{T_0})}{\mathbb P(B_E\mid B_{T_0})}\le\frac{\mathbb P(A_i\cap A_j)}{1-2\delta}. \]
         <p>Order the vertices and apply the lower bound with \(S\) equal to the preceding vertices, so that each unordered edge contributes once. The chain rule, \(1-t\le e^{-t}\), and these uniform bounds give</p>
-        \[ \mathbb P(W_b=0)\le\exp\left\{-\mu+\frac{\Delta}{1-2\delta}\right\}\le\exp\{-\mu+2\Delta\}=\exp\{-(1-o(1))\mu_b\}. \]
+        \[ \begin{aligned} \mathbb P(W_b=0)&\le\exp\left\{-\mu+\frac{\Delta}{1-2\delta}\right\}\\ &\le\exp\{-\mu+2\Delta\}=\exp\{-(1-o(1))\mu_b\}. \end{aligned} \]
         <div class="thm">
           <b>Theorem 5.4 (finite counting estimate).</b> Fix \(K\ge13\) and put \(R_b=\lfloor K\mu_b\rfloor\). Suppose that
           \[ P(z)X^{2R_b}\exp\{2\mu_b\}\le N\exp\{-4\mu_b\}. \]
           Then, uniformly in \(b\),
-          \[ \#\{n\le N:n\equiv b\pmod{P(z)},\quad n\notin \mathcal A_i^{(b)}\ \text{for every }i\in I_b\}\le\frac{N}{P(z)}\exp\{-(1-o(1))\mu_b\}. \]
+          \[ \begin{aligned} \#\{n\le N:{}&n\equiv b\pmod{P(z)},\\ &n\notin \mathcal A_i^{(b)}\ \text{for every }i\in I_b\}\\ &\le\frac{N}{P(z)}\exp\{-(1-o(1))\mu_b\}. \end{aligned} \]
         </div>
         <div class="thm">
           <b>Lemma 5.5 (lifting).</b> Let \(\mathcal E\) be a set of positive integers closed under taking divisors. Suppose \(2\le y\ll\log N\) and, uniformly for \(\sqrt N\le T\le N\),
@@ -357,11 +357,11 @@
         </div>
         <div class="thm">
           <b>Proposition 6.2 (quadratic divisor sums).</b> The selected divisor family, before any sieving at small primes, satisfies
-          \[ M_1:=\sum_{e\in\mathcal F}\frac1{\operatorname{rad}(e)}\asymp_m(\log X)^2,\qquad M_\varphi:=\sum_{e\in\mathcal F}\frac1{\varphi(\operatorname{rad}(e))}\asymp_m(\log X)^2. \]
+          \[ \begin{gathered} M_1:=\sum_{e\in\mathcal F}\frac1{\operatorname{rad}(e)}\asymp_m(\log X)^2,\\ M_\varphi:=\sum_{e\in\mathcal F}\frac1{\varphi(\operatorname{rad}(e))}\asymp_m(\log X)^2. \end{gathered} \]
         </div>
         <div class="thm">
           <b>Lemma 6.5 (average over small divisors).</b> Uniformly for every \(b\in(\mathbb Z/P(z)\mathbb Z)^\times\),
-          \[ \Sigma_b:=\sum_{\substack{d_-\le U\\d_-\mid P(z)\\d_-\ \mathrm{odd}}}\sum_{\substack{e\in\mathcal F\\b\equiv-me\pmod{d_-}}}\frac1{\varphi(m\operatorname{rad}(e))}\asymp_m(\log X)^2\log z. \]
+          \[ \begin{gathered} \Sigma_b:=\sum_{\substack{d_-\le U\\d_-\mid P(z)\\d_-\ \mathrm{odd}}}\sum_{\substack{e\in\mathcal F\\b\equiv-me\pmod{d_-}}}\frac1{\varphi(m\operatorname{rad}(e))}\\ \asymp_m(\log X)^2\log z. \end{gathered} \]
         </div>
         <div class="thm">
           <b>Proposition 6.6 (total event weight).</b> Uniformly in \(b\in(\mathbb Z/P(z)\mathbb Z)^\times\),
@@ -390,7 +390,7 @@
       <p>with \(\alpha_m&gt;0\) sufficiently small. Lemma 3.1 gives \(\log P(z)\ll z=(\log X)^4\). For \(R_b=\lfloor K\mu_b\rfloor\),</p>
       \[ \log P(z)+2R_b\log X+6\mu_b\ll_m(\log X)^4. \]
       <p>Taking \(\alpha_m\) small makes this at most \(\tfrac12\log N\). Since \(\log T\ge\tfrac12\log N\) for \(\sqrt N\le T\le N\), this choice of \(X\), cutoff, and family satisfies the level condition of Theorem 5.4 throughout that range. Theorem 5.4, summed over the reduced classes modulo \(P(z)\), gives</p>
-      \[ \#\{n\le T:(n,P(z))=1,\ m/n\text{ has no representation}\}\ll_m T\exp\{-c'_m(\log N)^{3/4}\}. \]
+      \[ \begin{aligned} \#\{n\le T:(n,P(z))=1,\ m/n\text{ has no representation}\}&\\ \ll_m T\exp\{-c'_m(\log N)^{3/4}\}&. \end{aligned} \]
       <p>The exceptional set is closed under taking divisors: a representation for a divisor of \(n\) scales to one for \(n\). Apply Lemma 5.5 at the common cutoff \(z=\alpha_m^4\log N\). The factor \(\log(2z)\) and the error \(N^{3/4+o_m(1)}\) are absorbed by decreasing \(c'_m\).</p>
       <p><b>Proof of Theorem 1.</b> Take \(m=4\) in Theorem 2 and use \(E(N)\le E_4(N)\). The assertion for prime denominators follows as well, since \(\pi(N)\gg N/\log N\) and the factor \(\log N\) is absorbed by decreasing the constant in the exponential.</p>
     </div>
