@@ -128,11 +128,9 @@
   <div class="wrap split">
     <div>
       <h2>Abstract</h2>
-      <p>Let \(E(N)\) be the number of integers \(2\le n\le N\) for which</p>
+      <p>Let \(E(N)\) denote the number of integers \(2\le n\le N\) for which</p>
       \[ \frac4n=\frac1x+\frac1y+\frac1z \]
-      <p>has no solution in positive integers. Vaughan proved \(E(N)\ll N\exp\{-c(\log N)^{2/3}\}\). We prove</p>
-      \[ E(N)\ll N\exp\{-c(\log N)^{3/4}\}. \]
-      <p>For each \(a\ge1\), the divisors of \(a^2\) supply congruence classes modulo \(4a-1\) on which such representations exist. For a large parameter \(X\), we select a family whose reciprocal moduli sum to order \((\log X)^3\). Averaging over small divisors retains this weight while controlling shared prime factors. A finite counting argument gives the stated bound at the scale \(\log X\asymp(\log N)^{1/4}\). The same argument gives this exponent for every fixed numerator \(m\ge4\).</p>
+      <p>has no solution in positive integers. Vaughan proved that \(E(N)\ll N\exp\{-c(\log N)^{2/3}\}\). We prove \(E(N)\ll N\exp\{-c(\log N)^{3/4}\}\). For each \(a\ge1\), the divisors of \(a^2\) give congruence classes modulo \(4a-1\) on which the equation has solutions. Let \(X\) be large. We construct a family of these classes whose reciprocal moduli sum to order \((\log X)^3\). Averaging over small divisors preserves this order of magnitude while controlling common prime factors of the moduli. A sieve argument then gives the stated bound with \(\log X\asymp(\log N)^{1/4}\). The same argument gives the exponent \(3/4\) for every fixed numerator \(m\ge4\) in the Erdős–Straus–Schinzel problem.</p>
     </div>
     <div class="panel" id="solver">
       <h3>Representations of \(4/n\)</h3>
@@ -155,12 +153,12 @@
         \[ \frac4n=\frac1x+\frac1y+\frac1z \]
         <p>has a solution in positive integers. Let \(E(N)\) count the exceptions \(2\le n\le N\). Vaughan proved the classical estimate</p>
         \[ E(N)\ll N\exp\{-c(\log N)^{2/3}\} \]
-        <p>for some absolute \(c&gt;0\). Our main result improves the exponent.</p>
+        <p>for some absolute \(c&gt;0\), and our main result improves the exponent.</p>
         <div class="thm">
-          <b>Theorem 1 (main theorem).</b> There is an absolute constant \(c&gt;0\) such that, for all \(N\ge3\),
+          <b>Theorem 1.</b> There is an absolute constant \(c&gt;0\) such that, for all \(N\ge3\),
           \[ E(N)\ll N\exp\{-c(\log N)^{3/4}\}. \]
         </div>
-        <p>The same saving holds relative to the primes: the number of exceptional primes up to \(N\) is \(\ll\pi(N)\exp\{-c(\log N)^{3/4}\}\) after decreasing \(c\).</p>
+        <p>The number of exceptional primes up to \(N\) is also \(\ll\pi(N)\exp\{-c(\log N)^{3/4}\}\) after decreasing \(c\).</p>
         <p>For \(m\ge4\), let \(E_m(N)\) count the positive integers \(n\le N\) for which \(m/n\) is not a sum of three unit fractions.</p>
         <div class="thm">
           <b>Theorem 2 (Erdős–Straus–Schinzel exceptional sets for a fixed numerator).</b> For each fixed integer \(m\ge4\), there are constants \(c_m,C_m&gt;0\) such that, for all \(N\ge3\),
@@ -172,20 +170,20 @@
       </div>
       <div>
         <div class="thm">
-          <b>Example 1.1.</b> For \(n=2521\), take \(a=12\) and \(h=16\). Then \(h\mid a^2\) and
-          \[ 4a-1=47,\qquad n+4h=2585=47\cdot55. \]
+          <b>Example 1.1.</b> For \(n=2521\), take \(a=12\) and \(e=16\). Then \(e\mid a^2\) and
+          \[ 4a-1=47,\qquad n+4e=2585=47\cdot55. \]
           Lemma 2.3 gives
           \[ \frac4{2521}=\frac1{644}+\frac1{30252}+\frac1{1217643}. \]
         </div>
         <p>We use the Type II congruences</p>
         \[ 4a-1\mid n+4h,\qquad h\mid a^2. \]
-        <p>The choices \(h=1,a,a^2\) give the shifts \(-4,-1,-a\) modulo \(4a-1\), respectively. The sum over the remaining divisors has cubic logarithmic order; see Proposition 4.2.</p>
-        <p>In the selected family, compatible congruences with the same large prime coincide. We bound the remaining overlaps by sums over common small factors. Two divisor sums give weight \((\log X)^2\); averaging over small divisors supplies \(\log z\), which combines with the rough cofactor sum \(\log X/\log z\) to give the third logarithm.</p>
+        <p>The choices \(h=1,a,a^2\) give the shifts \(-4,-1,-a\) modulo \(4a-1\), respectively. The sum of the reciprocal moduli over the remaining divisors, with \(a\le X\), is of order \((\log X)^3\); see Proposition 4.2.</p>
+        <p>In the selected family, compatible congruences with the same large prime coincide, and we bound the remaining overlaps by sums over common small factors. Two divisor sums give weight \((\log X)^2\); averaging over small divisors gives \(\log z\), which combines with the rough cofactor sum \(\log X/\log z\) to give the third logarithm.</p>
         <div class="thm">
-          <b>Remark 1.2 (the exponent \(3/4\)).</b> For a family of congruences with total weight \(\mu\asymp(\log X)^k\) and the overlap estimates below, the level condition of Theorem 5.4 has the form \(\log P(z)+O(\mu\log X)\le\log N\). When \(\log P(z)=O((\log X)^{k+1})\), choosing \(\log X\) of order \((\log N)^{1/(k+1)}\) gives a saving \(\exp\{-c(\log N)^{k/(k+1)}\}\). The family with prime moduli used in the Vaughan method has quadratic mass. Here the cubic mass gives \(3/4\).
+          <b>Remark 1.2 (the exponent \(3/4\)).</b> For a family of congruences with total weight \(\mu\asymp(\log X)^k\) and the overlap estimates below, the level condition of Theorem 5.4 has the form \(\log P(z)+O(\mu\log X)\le\log N\). When \(\log P(z)=O((\log X)^{k+1})\), choosing \(\log X\) of order \((\log N)^{1/(k+1)}\) gives a saving \(\exp\{-c(\log N)^{k/(k+1)}\}\). The family with prime moduli used in the Vaughan method has quadratic weight, whereas the cubic weight here gives \(3/4\).
         </div>
         <h3 class="sub">Formalization</h3>
-        <p>The companion Lean 4 development proves Theorems 1 and 2, the bound for exceptional primes, Example 1.1, and every numbered result of Sections 2–6, using only Mathlib and Lean's standard axioms. Its proof of Theorem 3.7 adapts an existing open source formalization of the Bombieri–Vinogradov theorem, credited in the repository.</p>
+        <p>The companion Lean 4 development proves Theorems 1 and 2, the bound for exceptional primes, Example 1.1, and every numbered result of Sections 2–6.</p>
       </div>
     </div>
   </div>
@@ -204,9 +202,9 @@
         </div>
         <p>Put \(A=an\). Since \(ma\equiv1\pmod q\), the congruence on \(n\) gives \(A\equiv-e\pmod q\). Since \(e\mid a^2\) and \((a,q)=1\), also \((e,q)=1\). Define</p>
         \[ x=A,\qquad y=\frac{A+e}{q},\qquad z=\frac{A+A^2/e}{q}. \]
-        <p>Since \(e\mid a^2\), the quantity \(A^2/e=(a^2/e)n^2\) is an integer. The congruence \(A\equiv-e\pmod q\) makes \(y\) integral; squaring and multiplying by the inverse of \(e\) modulo \(q\) gives \(A^2/e\equiv e\pmod q\), so \(z\) is integral too. Both are positive. Moreover</p>
+        <p>Since \(e\mid a^2\), the quantity \(A^2/e=(a^2/e)n^2\) is an integer. The congruence \(A\equiv-e\pmod q\) makes \(y\) integral; squaring and multiplying by the inverse of \(e\) modulo \(q\) gives \(A^2/e\equiv e\pmod q\), so \(z\) is integral too. Both are positive and satisfy</p>
         \[ qy-A=e,\qquad qz-A=A^2/e, \]
-        <p>and hence \((qy-A)(qz-A)=A^2\). Expanding and cancelling \(A^2\) gives</p>
+        <p>and hence \((qy-A)(qz-A)=A^2\). Expanding and canceling \(A^2\) gives</p>
         \[ q^2yz-qA(y+z)=0. \]
         <p>Dividing by \(qyz\) yields \(q=A(1/y+1/z)\). Therefore</p>
         \[ \frac1x+\frac1y+\frac1z=\frac{1+q}{an}=\frac m n. \]
@@ -251,7 +249,7 @@
         <div class="thm">
           <b>Proposition 4.5 (pairwise coprime moduli).</b> Let \(\mathcal B\subset\{a\le L\}\) be such that the integers \(4a-1\) with \(a\in\mathcal B\) are pairwise coprime. Then
           \[ \sum_{a\in\mathcal B}\frac{|\Lambda_{\mathrm{int}}(a)|}{4a-1}\ll(\log L)^2. \]
-          Thus no subfamily of these congruences with pairwise coprime moduli can carry the cubic mass in Proposition 4.2.
+          Thus no subfamily of these congruences with pairwise coprime moduli can carry the cubic weight in Proposition 4.2.
         </div>
       </div>
       <div>
@@ -277,12 +275,12 @@
 
 <section class="section is-light" id="counting">
   <div class="wrap">
-    <h2>Counting compatible congruences</h2>
+    <h2>A sieve for compatible congruences</h2>
     <div class="split">
       <div>
         <p>Put</p>
-        \[ z=(\log X)^4,\qquad U=(\log X)^8,\qquad P(z)=\prod_{\ell\le z}\ell. \]
-        <p>The product is over primes. For each reduced class \(b\pmod{P(z)}\), let \(I_b\) be a finite family of congruences with squarefree moduli \(q_i\le X\), coprime to \(P(z)\), and residues \(c_i\pmod{q_i}\). Write \(w_i=1/q_i\) and \(\mu_b=\sum_iw_i\). Two indices are compatible when their residues agree modulo \((q_i,q_j)\); a set is compatible when every pair is. Put</p>
+        \[ z=(\log X)^4,\qquad U=(\log X)^8,\qquad P(z)=\prod_{\ell\le z}\ell, \]
+        <p>where the product is over primes. For each reduced class \(b\pmod{P(z)}\), let \(I_b\) be a finite family of congruences with squarefree moduli \(q_i\le X\), coprime to \(P(z)\), and residues \(c_i\pmod{q_i}\). Write \(w_i=1/q_i\) and \(\mu_b=\sum_iw_i\). Two indices are compatible when their residues agree modulo \((q_i,q_j)\); a set is compatible when every pair is. Put</p>
         \[ \begin{gathered} L_S=\operatorname{lcm}(q_i:i\in S),\qquad L_\varnothing=1,\\ A(S)=\sum_{\substack{i\notin S\\S\cup\{i\}\ \mathrm{compatible}}}w_i(q_i,L_S). \end{gathered} \]
         <p>Let \(\Omega_b\) be the finite product probability space over all primes appearing in the moduli \(q_i\). The event \(\mathcal A_i^{(b)}\) is defined by the residue \(c_i\pmod{q_i}\). If two events are compatible, the Chinese Remainder Theorem gives</p>
         \[ \mathbb P(\mathcal A_i^{(b)}\cap \mathcal A_j^{(b)})=\frac1{\operatorname{lcm}(q_i,q_j)}=\frac{(q_i,q_j)}{q_iq_j}; \]
@@ -295,10 +293,10 @@
       </div>
       <div>
         <div class="thm">
-          <b>Theorem 5.2 (probability of no event).</b> Uniformly in \(b\),
+          <b>Theorem 5.2 (a Janson-type inequality).</b> Uniformly in \(b\),
           \[ \mathbb P(W_b=0)\le\exp\{-(1-o(1))\mu_b\}. \]
         </div>
-        <p>We give a conditioning proof related to Spencer's argument. Fix \(b\) and abbreviate \(\mathcal A_i^{(b)}\), \(\mu_b\), \(\delta_b\), \(\Delta_b\) by \(A_i\), \(\mu\), \(\delta\), \(\Delta\). Put \(B_S=\bigcap_{j\in S}A_j^c\). We first show by induction on \(|S|\) that</p>
+        <p>We adapt Spencer's conditioning argument. Fix \(b\) and abbreviate \(\mathcal A_i^{(b)}\), \(\mu_b\), \(\delta_b\), \(\Delta_b\) by \(A_i\), \(\mu\), \(\delta\), \(\Delta\). Put \(B_S=\bigcap_{j\in S}A_j^c\). We first show by induction on \(|S|\) that</p>
         \[ \mathbb P(A_i\mid B_S)\le2w_i\qquad(i\notin S). \]
         <p>Write \(\Gamma=\{j\in S:j\sim i\}\) and \(T=S\setminus\Gamma\). If \(\Gamma\) is empty, independence gives equality with \(w_i\). Otherwise \(|T|&lt;|S|\), so induction and the union bound give</p>
         \[ \mathbb P(B_\Gamma\mid B_T)\ge1-\sum_{j\in\Gamma}\mathbb P(A_j\mid B_T)\ge1-2\delta. \]
@@ -310,7 +308,7 @@
         <p>Order the vertices and apply the lower bound with \(S\) equal to the preceding vertices, so that each unordered edge contributes once. The chain rule, \(1-t\le e^{-t}\), and these uniform bounds give</p>
         \[ \begin{aligned} \mathbb P(W_b=0)&\le\exp\left\{-\mu+\frac{\Delta}{1-2\delta}\right\}\\ &\le\exp\{-\mu+2\Delta\}=\exp\{-(1-o(1))\mu_b\}. \end{aligned} \]
         <div class="thm">
-          <b>Theorem 5.4 (finite counting estimate).</b> Fix \(K\ge13\) and put \(R_b=\lfloor K\mu_b\rfloor\). Suppose that
+          <b>Theorem 5.4 (sieve upper bound).</b> Fix \(K\ge13\) and put \(R_b=\lfloor K\mu_b\rfloor\). Suppose that
           \[ P(z)X^{2R_b}\exp\{2\mu_b\}\le N\exp\{-4\mu_b\}. \]
           Then, uniformly in \(b\),
           \[ \begin{aligned} \#\{n\le N:{}&n\equiv b\pmod{P(z)},\\ &n\notin \mathcal A_i^{(b)}\ \text{for every }i\in I_b\}\\ &\le\frac{N}{P(z)}\exp\{-(1-o(1))\mu_b\}. \end{aligned} \]
@@ -368,7 +366,7 @@
           \[ \mu_b\asymp_m(\log X)^3. \]
         </div>
         <div class="thm">
-          <b>Lemma 6.8 (uniqueness when the large prime is shared).</b> Two distinct compatible events in \(I_b\) cannot share the same large prime \(p\). For any prime \(p&gt;X^\beta\), the total weight of events having this large prime is at most \(H/p\le X^{\theta-\beta}=o(1)\).
+          <b>Lemma 6.8 (uniqueness when the large prime is shared).</b> Two distinct compatible events in \(I_b\) cannot have the same large prime \(p\). For any prime \(p&gt;X^\beta\), the total weight of events having this large prime is at most \(H/p\le X^{\theta-\beta}=o(1)\).
         </div>
         <div class="thm">
           <b>Lemma 6.9 (overlap bounds).</b> Uniformly in \(b\),
